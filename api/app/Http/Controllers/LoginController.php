@@ -36,7 +36,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::guard('web')->Zlogout();
+        Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return $this->responseNoContent();

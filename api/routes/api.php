@@ -44,18 +44,18 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [UserController::class, 'show']);
         Route::post('/', [UserController::class, 'store']);
         Route::put('/{id}', [UserController::class, 'update']);
-        Route::delete('/{id}', [UserController::class, 'delete']);
+        Route::delete('/{id}', [UserController::class, 'destroy']);
     });
 
     //Article
     Route::prefix('/articles')->middleware('role:author|reviewer')->group(function () {
         Route::get('/', [ArticleController::class, 'index']);
-        Route::get('/user/{id}', [ArticleController::class, 'getUserAticles']);
-        Route::get('/for-review/', [ArticleController::class, 'getArticlesForReview']);
+        Route::get('/user', [ArticleController::class, 'getUserAticles']);
+        Route::get('/for-review', [ArticleController::class, 'getArticlesForReview']);
         Route::get('/{id}', [ArticleController::class, 'show']);
         Route::post('/', [ArticleController::class, 'store']);
         Route::put('/{id}', [ArticleController::class, 'update']);
-        Route::delete('/{id}', [ArticleController::class, 'delete']);
+        Route::delete('/{id}', [ArticleController::class, 'destroy']);
     });
 
     //Reviews
@@ -64,6 +64,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [ReviewController::class, 'show']);
         Route::post('/', [ReviewController::class, 'store']);
         Route::put('/{id}', [ReviewController::class, 'update']);
-        Route::delete('/{id}', [ReviewController::class, 'delete']);
+        Route::delete('/{id}', [ReviewController::class, 'destroy']);
     });
 });

@@ -77,7 +77,7 @@ class ReviewController extends Controller
     public function destroy(string $id)
     {
         $user = auth()->user();
-        $review = Review::findOrFail($id);
+        $review = Review::find($id);
         if (!$review) {
             return $this->responseNotFound();
         }
@@ -85,6 +85,8 @@ class ReviewController extends Controller
         if ($review->user_id !== $user->id) {
             return $this->responseForbidden();
         }
+
+        $review->delete();
 
         return $this->responseNoContent();
     }
