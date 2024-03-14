@@ -72,7 +72,7 @@ class Controller extends BaseController
      * @param array $data = []
      * @return \Illuminate\Http\Response
      */
-    public function responseNoContent($data = [])
+    public function responseNoContent($data = ['message' => 'Success'])
     {
         return response()->json($data, Response::HTTP_NO_CONTENT);
     }

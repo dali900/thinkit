@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
@@ -33,9 +34,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', [LoginController::class, 'logout']);
     
     //Dashboard
-    /* Route::prefix('/dashboard')->middleware('role:admin')->group(function () {
+    Route::prefix('/statistics')->group(function () {
         Route::get('/', [DashboardController::class, 'index']);
-    }); */
+    });
 
     //Users
     Route::prefix('/users')->group(function () {

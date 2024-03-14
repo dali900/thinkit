@@ -30,11 +30,18 @@ class ArticleController extends Controller
         return $this->responseSuccess(ArticleResource::collection($articles));
     }
 
+    /**
+     * Get all articles pending review
+     */
     public function getArticlesForReview()
     {
         $articles = Article::with(['authors', 'reviews'])
-            ->whereRelation('reviews', 'reviews.user_id', '!=', auth()->id())
+            ->whereDoesntHave('reviews', function($query) {
+                $query->where('reviews.user_id', auth()->id());
+            })
+            ->orWhereDoesntHave('reviews')
             ->get();
+            
         return $this->responseSuccess(ArticleResource::collection($articles));
     }
 

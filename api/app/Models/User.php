@@ -34,4 +34,24 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     * Reviews
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function scopeReviewer($query)
+    {
+        return $query->where('role', 'reviewer');
+    }
+
+    public function scopeAuthor($query)
+    {
+        return $query->where('role', 'author');
+    }
+
 }

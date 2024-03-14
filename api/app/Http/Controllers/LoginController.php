@@ -22,7 +22,7 @@ class LoginController extends Controller
     {
         $attr = $request->validated();
 
-        if (!Auth::guard('web')->attempt($attr, $request->remember)) {
+        if (!Auth::attempt($attr, $request->remember)) {
             return $this->responseUnauthorized('Credentials do not match.');
         }
 
@@ -36,7 +36,9 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        auth()->logout();      
+        Auth::guard('web')->Zlogout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return $this->responseNoContent();
     }
 }
